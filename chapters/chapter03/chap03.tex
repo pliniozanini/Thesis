@@ -1,8 +1,6 @@
-%
-% File: chap01.tex
-% Author: Victor F. Brena-Medina
-% Description: Introduction chapter where the biology goes.
-%
+
+
+
 \let\textcircled=\pgftextcircled
 \chapter{Self-Priming Dielectric Elastomer Generators}
 \label{chap:2}
@@ -29,7 +27,7 @@ Here we report the development of a mathematical model to predict voltage boost 
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=6cm]{Cycle.png}
+\includegraphics[height=6cm]{fig03/Cycle.png}
 \end{tabular}
 \end{center}
 \caption 
@@ -44,7 +42,7 @@ DEG energy harvesting cycle using relaxation with constant charge}
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=5.2cm]{SPC_general.png}
+\includegraphics[height=5.2cm]{fig03/SPC_general.png}
 \end{tabular}
 \end{center}
 \caption 
@@ -55,8 +53,8 @@ SPC general scheme. Adapted from McKay \textit{et al.}\cite{SPCdesign}. }
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=4.2cm]{SPC_HV3.png}
-\includegraphics[height=4.2cm]{SPC_HC3.png}\\
+\includegraphics[height=4.2cm]{fig03/SPC_HV3.png}
+\includegraphics[height=4.2cm]{fig03/SPC_HC3.png}\\
 (a) \hspace{7cm} (b)
 \end{tabular}
 \end{center}
@@ -88,7 +86,7 @@ SPC effective configuration with (a) HV polarization, and (b) HC polarization. A
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=12cm]{Phasestgt2.png}
+\includegraphics[height=12cm]{fig03/Phasestgt2.png}
 \end{tabular}
 \end{center}
 \caption 
@@ -99,7 +97,7 @@ The four phases of the cycle.}
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=5cm]{SPC_cycle_ph2.png}\\
+\includegraphics[height=5cm]{fig03/SPC_cycle_ph2.png}\\
 \end{tabular}
 \end{center}
 \caption 
@@ -112,7 +110,7 @@ We can see how the cycle produces an overall system voltage boost in Figure \ref
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=5cm]{Cycles2.png}\\
+\includegraphics[height=5cm]{fig03/Cycles2.png}\\
 \end{tabular}
 \end{center}
 \caption 
@@ -146,7 +144,7 @@ In this section we introduce a general model of each phase of the DEG-SPC voltag
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=4cm]{schemeit-project3.png}\\
+\includegraphics[height=4cm]{fig03/schemeit-project3.png}\\
 \end{tabular}
 \end{center}
 \caption 
@@ -178,7 +176,7 @@ V_{\text{SPC}_\text{HV}} = V_0\left(\frac{C_{\text{DEG}_0}}{C_\text{DEG}(t_{12})
 
 \paragraph{} During Phase 2, the DEG voltage increases and not only supplies current to the load but also discharges into the SPC in its HV form. To describe the voltage behavior, we start by writing Kirchhoff's current law for the node U (see Figure \ref{fig:circuit}) in a general case:
 \begin{equation}\label{eq:kirchoff}
- \frac{V(t)}{Z} + C_\text{SPC}\diff{V(t)}{t}+C_\text{DEG}(t)\diff{V(t)}{t}+V(t)\diff{C_\text{DEG}(t)}{t} = 0.
+\frac{V(t)}{Z} + C_\text{SPC}\diff{V(t)}{t}+C_\text{DEG}(t)\diff{V(t)}{t}+V(t)\diff{C_\text{DEG}(t)}{t} = 0.
 \end{equation}
 
 \paragraph{} Given that $C_\text{SPC} =C_{\text{SPC}_\text{HV}}$ in this phase, and considering the initial conditions of this phase $C_\text{DEG}(t_{12}) = C_{\text{DEG}_{12}}$ and $V(t_{12}) = V_{\text{SPC}_\text{HV}}$, Equation \ref{eq:kirchoff} can be solved to give us the voltage in Phase 2, $V_2(t)$, as
@@ -274,7 +272,7 @@ C= \sqrt{C_{\text{DEG}_{\text{min}}}C_{\text{DEG}_{\text{max}}}}.
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=9cm]{boostmap2.png}\\
+\includegraphics[height=9cm]{fig03/boostmap2.png}\\
 \end{tabular}
 \end{center}
 \caption 
@@ -297,7 +295,7 @@ We can also verify that the maximum boost is obtained for $n=1$ if $\ofrac{C_{\t
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=9cm]{stages2.eps}\\
+\includegraphics[height=9cm]{fig03/stages2.eps}\\
 \end{tabular}
 \end{center}
 \caption 
@@ -312,7 +310,7 @@ Voltage boost, $B$, versus the DEG's capacitance swing, $\ofrac{C_{\text{DEG}_\t
 \begin{figure}[ht]
 \begin{center}
 \begin{tabular}{c}
-\includegraphics[height=7cm]{Modelcomparison3.PNG}\\
+\includegraphics[height=7cm]{fig03/Modelcomparison3.PNG}\\
 \end{tabular}
 \end{center}
 \caption 

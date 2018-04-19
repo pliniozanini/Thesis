@@ -31,6 +31,9 @@
 % Adding metadata:
 \usepackage{datetime}
 \usepackage{ifpdf}
+
+
+
 \ifpdf
 \pdfinfo{
    /Author (Author's name)
@@ -157,6 +160,11 @@
 \usepackage[centertags]{amsmath}			%Writes maths centred down
 \usepackage{stmaryrd}					%New AMS symbols
 \usepackage{amssymb}					%Calls AMS symbols
+\usepackage{amsmath,amsfonts}
+\newcommand{\ofrac}[2]{{#1}/{#2}}
+\newcommand{\diff}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\odiff}[2]{\ofrac{\mathrm{d}#1}{\mathrm{d}#2}}
+\usepackage[mode=text]{siunitx}
 \usepackage{amsthm}					%Calls AMS theorem environment
 \usepackage{newlfont}					%Helpful package for fonts and symbols
 \usepackage{layouts}					%Layout diagrams
@@ -375,11 +383,15 @@
 \clearemptydoublepage
 \import{chapters/chapter03/}{chap03.tex}
 \clearemptydoublepage
+\import{chapters/chapter04/}{chap04.tex}
+\cleardoublepage
+%\import{chapters/chapter05/}{chap05.tex}
+%\clearemptydoublepage
 %
 %
 % And the appendix goes here
-\appendix
-\import{chapters/appendices/}{app0A.tex}
+%\appendix
+%\import{chapters/appendices/}{app0A.tex}
 \clearemptydoublepage
 %
 % Apparently the guidelines don't say anything about citations or

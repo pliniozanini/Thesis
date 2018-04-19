@@ -1,15 +1,11 @@
-%
-% File: chap01.tex
-% Author: Victor F. Brena-Medina
-% Description: Introduction chapter where the biology goes.
-%
+
 \let\textcircled=\pgftextcircled
 \chapter{Modelling the effect of actuator-like behavior in dielectric elastomer generators}
 \label{chap:1}
 
 \initial{T}his chapter is based on the paper ''Modelling the effect of actuator-like behavior in dielectric elastomer generators``, published in the Volume 107 of Applied Physics Letters in 2015.
 
-Dielectric elastomers have a dual behavior, able to convert electrical energy into mechanical if charged electrostatically and to convert mechanical to electrical energy if stretched and relaxed in a cycle that exploits its capacitance change. During such energy harvesting cycles, the material needs an electrical energy bias to be able to convert mechanical work into electrical energy, which produces an actuator behavior on the DEG that results in losses and decreases its performance. In this paper, we investigate this actuation behavior and its effect on energy harvesting in DEGs. We compare two different charging methods and show that a constant voltage method can increase the net energy harvested by 5 times, despite the unwanted actuation effect.
+Dielectric elastomers have a dual behavior, able to convert electrical energy into mechanical if charged electrostatically and to convert mechanical to electrical energy if stretched and relaxed in a cycle that exploits its capacitance change. During such energy harvesting cycles, the material needs an electrical energy bias to be able to convert mechanical work into electrical energy, which produces an actuator behavior on the DEG that results in losses and decreases its performance. In this chapter, we investigate this actuation behavior and its effect on energy harvesting in DEGs. We compare two different charging methods and show that a constant voltage method can increase the net energy harvested by 5 times, despite the unwanted actuation effect.
 
 
 
@@ -20,7 +16,7 @@ Dielectric elastomers have a dual behavior, able to convert electrical energy in
 
 When designing and modelling energy harvesting cycles for DEGs, there are two possible scenarios to take into account: position-based or force-based cycling. Position-based cycling corresponds to most mechanical systems, such as cranked mechanisms, where the strain cycle is fixed. Force based cycling more accurately emulates natural phenomena, such as waves and wind gusts, from which we may wish to harvest renewable energy. In these phenomena, a pressure or force variation acts against the material and strain is not mechanically constrained. 
 
-Many previous studies have designed harvesting cycles\cite{RN85,RN629,Shian2014OptimizingGenerators} but none has taken into account the actuation-like behavior induced when the material is charged. In a position based cycle, that yields a softening of the material, reducing the force induced by the membrane elasticity, as can be noticed in experiments reported in \cite{RN1}, where after charging it is possible to notice a drop in the force measurements across the DEG.
+Many previous studies have designed harvesting cycles\cite{RN85,RN629,Shian2014OptimizingGenerators} but none has taken into account the actuation-like behavior induced when the material is charged. In a position based cycle, that yields a softening of the material, reducing the force induced by the membrane elasticity, as can be noticed in experiments reported in \cite{RN1}, where, after charging, it is possible to notice a drop in the force measurements across the DEG.
 When dealing with force-based scenarios, the actuator like behaviour corresponds to an increase in stretch due to the charges added and will happen differently depending on how the charging is controlled.
 
 Since energy harvested is proportional to the bias electrical energy input during charging, energy harvesting capabilities are thought to increase with the use of higher electric fields. On the other hand, as the electric field is increased towards material limits, the charge-induced actuation will be an increasingly important issue, which must be taken into account in any realistic energy harvesting cycle.
@@ -29,7 +25,8 @@ This chapter seeks both to report the phenomenon of charge-induced actuation, fo
 
 \section{Methods}
 \label{sec:methods}
-To evaluate the actuation after the charging phase, we compare two different methods to move from the stretched and uncharged state to the stretched and charged state. Both are illustrated in Figure 1, and involve transition from state 2 (stretched and uncharged) to equilibrium at state 3 (stretched and charged with bias voltage) via different intermediate states. The first method (mode A), instantaneously injects sufficient charge at state 2 to elevate the bias electric field to state 2.5\textquotesingle.  The electrical supply is then disconnected. The DEG then undergoes actuation as a result of this electric field, moving it to state 3.  In the second method (mode B), a voltage is instantaneously applied at state 2 to raise the electric field to state 2.5\textquotedbl. The DEG then undergoes actuation as a result of this constant voltage. Electric field and strain both increase until state 3 is reached.  The applied voltage is chosen such that state 3 exactly matches that for mode A. Having the same state for both methods guarantees that all remaining characteristics of the cycle are identical. 
+To evaluate the actuation after the charging phase, we compare two different methods to move from the stretched and uncharged state to the stretched and charged state. Both are illustrated in Figure 1, and involve transition from quasi-equilibrium state 2 (stretched and uncharged) to a quasi-equilibrium at state 3 (stretched and charged with bias voltage) via different intermediate states. Note that we denote those states as quasi-equilibrium since they are still dependent on dynamical effects, such as creep and relaxation.Thus, a finite time interval and a stationary load state would be necessary to reach a true equilibrium. 
+The first method (mode A), instantaneously injects sufficient charge at state 2 to elevate the bias electric field to state 2.5\textquotesingle.  The electrical supply is then disconnected. The DEG then undergoes actuation due to material relaxation as a result of this electric field, moving it to state 3, with decreasing electric field as capacitance increases.  In the second method (mode B), a voltage is instantaneously applied at state 2 to raise the electric field to state 2.5\textquotedbl. The DEG then undergoes similar actuation process as a result of this constant voltage. Electric field and strain both increase, as charges from the power supply flow to the DEG as its capacitance increase, until state 3 is reached. In order to compare the different modes, the applied voltage in Mode B is chosen such that the equilibrium in state 3 would exactly match that for mode A. Having the same state for both methods guarantees that all remaining characteristics of the cycle are identical. 
 
 \begin{figure}
    \begin{center}
@@ -72,13 +69,13 @@ Voltage versus charge plot for the DEG.}
    \end{figure}  
  
 
-In order to couple the charging modes with the electromechanical model of a DEG, a common method is to consider equilibrium states of a harvesting cycle\cite{Shian2014OptimizingGenerators,RN73,RN32}. Here we developed a simulation model based on Graf et al\cite{RN73}, applied to a uniaxially deformed material. The deformation of the DEG, x, evolves according to
+In order to couple the charging modes with the electromechanical model of a DEG, a common method is to consider equilibrium states of a harvesting cycle\cite{Shian2014OptimizingGenerators,RN73,RN32}. Here we developed a simulation model based on Graf et al\cite{RN73}, applied to a uniaxially deformed material. The length of the DEG, x, evolves according to
 \begin{equation} \label{eq:1}
 m \ddot{x} = F_x- d_v \dot{x} -  \frac{B}{x} \left( G \frac{\lambda_x^4-1}{\lambda_x^2} +\sigma_z \right)
 \end{equation}
 
 
-where $m$ is the equivalent mass, $F_x$ is the applied force, $d_v$ is the damping coefficient, $B$ is the total volume, $G$ is the shear modulus (Neo-Hookean model) and $λ_x$ is the stretch ratio. The applied stress, $\sigma_z$, is given by
+where $m$ is the equivalent mass, $F_x$ is the applied force, $d_v$ is the damping coefficient, $B$ is the total volume, $G$ is the shear modulus (Neo-Hookean model) and $\lambda_x$ is the stretch ratio, defined as $x/x_0$, with $x_0$ being the initial length of the material in the stretch direction. The applied stress, $\sigma_z$, is given by
 \begin{equation} \label{eq:2}
 \sigma_z = -e_r e_0 \left(\frac{V}{z}\right)^2 = -e_r e_0 \left(\frac{V}{z_0} \right)^2 \lambda_x^2
 \end{equation}
@@ -120,7 +117,7 @@ Voltage of the DEG as a function of time.}
 
 In Figure \ref{fig:Cycle txV}, we show the evolution of voltage as a function of time, for both charging modes, as the DEG undergoes 1 Hz sinusoidal forcing. State 2 occurs just before the bias voltage is applied, while state 3 takes place when both the curves match before transition to state 4 (around 0.58 s). 
 
-Note that although the curves approximately converge to the equilibrium state 3, they do not match perfectly at this point, since the model we simulate is dynamic, and it is not possible to reach an equilibrium (in a smooth system) in finite time. However, the two trajectories do converge quickly, and then proceed to the same state 4 prior to discharge, outputting the same amount of energy. Notice that time taken for the trajectories to converge depends on the material viscosity and the magnitude and frequency of the electrical and mechanical loads applied.
+Note that although the curves approximately converge to the quasi-equilibrium state 3, they do not match perfectly at this point, since the model we simulate is dynamic, and it is not possible to reach an equilibrium (in a smooth system) in finite time. However, the two trajectories do converge quickly, and then proceed to the same state 4 prior to discharge, outputting the same amount of energy. Notice that time taken for the trajectories to converge depends on the material viscosity and the magnitude and frequency of the electrical and mechanical loads applied.
 
 When charging a constant value capacitor to a voltage $V$, in order to store a charge $Q$ it is necessary to expend an amount of energy VQ, although only $VQ/2$ is stored. Hence, when charging with constant capacitance, there is an implicit loss of 50\% of the electric energy input. Wang et al\cite{RN1} suggest that to guarantee that energy will be harvested in a cycle it is necessary that the capacitance of the charging state should be at least twice the capacitance of the discharging state.
 On the other hand, when charging with constant voltage, we have a change in energy $U_e$ of
@@ -130,7 +127,7 @@ On the other hand, when charging with constant voltage, we have a change in ener
 
 Since half this energy is stored, as before, the other half is converted to mechanical work, as described for actuator behaviour by Carpi et al\cite{RN43}. 
 
-From Figure \ref{fig:Cycle QxV} it is easy to see how high the losses can be while charging in mode A compared to mode B. In mode B, the charging can be divided into two phases: the first, to voltage $V_3$ and charge $Q_2.5$ ) and the second, under constant voltage, to voltage $V_3$ and charge $Q_3$. The area below the curves in Figure \ref{fig:Cycle QxV} shows the amount of energy expended in charging. The triangle between the points 2.5\textquotesingle, 2.5\textquotedbl and 3 corresponds to the extra work done in mode A.
+From Figure \ref{fig:Cycle QxV} it is easy to see how high the losses can be while charging in mode A compared to mode B. In mode B, the charging can be divided into two phases: the first, to voltage $V_3$ and charge $Q_{2.5\textquotedbl}$ ) and the second, under constant voltage, to voltage $V_3$ and charge $Q_3$. The area below the curves in Figure \ref{fig:Cycle QxV} shows the amount of energy expended in charging. The triangle between the points 2.5\textquotesingle, 2.5\textquotedbl and 3 corresponds to the extra work done in mode A.
 We compare both charging energies, calculated by direct simulation, in table I. In order to have 85 mJ electric energy stored in state 3, it is necessary to input 190 mJ electric energy using mode A, but only 160 mJ using mode B (for the same stored energy). The electric energy dissipated in this process corresponds to the 50\% lost during capacitor charging, together with losses in the resistive elements (e.g. electrodes).
 
 \subsection{Charging - Mechanical point of view}
