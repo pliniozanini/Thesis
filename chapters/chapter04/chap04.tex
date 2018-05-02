@@ -48,14 +48,14 @@ In this paper, we investigate the behaviour of the DEG-SPC system in a force-bas
 	Methods
 We use an analytical mathematical model (described fully in [23]) to represent the behaviour of an ideal DEG-SPC system without electric load attached: the energy harvested in one cycle is completely used to prime the following one. In that scenario, we can describe the voltage gain in a single cycle, B, as [23]
 \begin{equation}
-B=\frac{C^2+(C_D^{+} + C_D^{-})C+C_D^{+}C_D^{-}}{C^2+(C_D^{+}/\omega^2 +C_D^{-}\omega^2)C+C_D^{+}C_D^{-}} 
+B=\frac{C^2+(C_{\text{DEG}_\text{max}} + C_{\text{DEG}_\text{min}})C+C_{\text{DEG}_\text{max}}C_{\text{DEG}_\text{min}}}{C^2+(C_{\text{DEG}_\text{max}}/\omega^2 +C_{\text{DEG}_\text{min}}\omega^2)C+C_{\text{DEG}_\text{max}}C_{\text{DEG}_\text{min}}} 
 \end{equation}
 where 
 \begin{equation}
 \omega^2=  \frac{n+1}{n}
 \end{equation}
 
-$n$ and $C$ are the design parameters of the SPC (as shown in figure \ref{fig:SPC_general}), and $C_D^{+}$ and $C_D^{-}$ are, respectively, the maximum and minimum capacitances the DEG reaches in that cycle. Note that the DEG capacitance can be related to its physical dimensions as
+$n$ and $C$ are the design parameters of the SPC (as shown in figure \ref{fig:SPC_general}), and $C_{\text{DEG}_\text{max}}$ and $C_{\text{DEG}_\text{min}}$ are, respectively, the maximum and minimum capacitances the DEG reaches in that cycle. Note that the DEG capacitance can be related to its physical dimensions as
 
 \begin{equation}
 C=\frac{e_r e_0 Vol}{z^2}
@@ -64,11 +64,11 @@ C=\frac{e_r e_0 Vol}{z^2}
 where $e_r$ is the material relative permittivity, $e_0$ is the vacuum dielectric permittivity, $Vol$ is the (constant) total volume and $z$ the membrane thickness.
 From \ref{eq:1}, we are also able to obtain the condition for the boost to exist, given by 
 \begin{equation}
-C_D^{+}>\omega^2 C_D^{-}
+C_{\text{DEG}_\text{max}}>\omega^2 C_{\text{DEG}_\text{min}}
 \end{equation}
-Analysing the expected behaviour of a DEG-SPC system, we know – in contrast to conventional actuator behaviour – that maximum electric field will occur during the minimum stretch in a cycle [21]. Thus, we hypothesise an increased effect of the actuation in the minimum stretch position rather than in the maximum, and so the capacitance swing, $C_D^{+}/C_D^{-}$, will change cycle-by-cycle, since we expect $C_D^{-}$ to increase more than $C_D^{+}$. Considering a system with a fixed number of stages, $n$, if the capacitance swing is reduced, it will certainly affect the boost and will ultimately limit it. In this case, we have that, in the limit,
+Analysing the expected behaviour of a DEG-SPC system, we know – in contrast to conventional actuator behaviour – that maximum electric field will occur during the minimum stretch in a cycle [21]. Thus, we hypothesise an increased effect of the actuation in the minimum stretch position rather than in the maximum, and so the capacitance swing, $C_{\text{DEG}_\text{max}}/C_{\text{DEG}_\text{min}}$, will change cycle-by-cycle, since we expect $C_{\text{DEG}_\text{min}}$ to increase more than $C_{\text{DEG}_\text{max}}$. Considering a system with a fixed number of stages, $n$, if the capacitance swing is reduced, it will certainly affect the boost and will ultimately limit it. In this case, we have that, in the limit,
 \begin{equation}
-C_D^{+}/C_D^{-}= \omega^2
+C_{\text{DEG}_\text{max}}/C_{\text{DEG}_\text{min}}= \omega^2
 \end{equation}
 
 leading to 

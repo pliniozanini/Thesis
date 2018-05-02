@@ -2,42 +2,18 @@
 
 
 \let\textcircled=\pgftextcircled
-\chapter{Self-Priming Dielectric Elastomer Generators}
-\label{chap:2}
+\chapter{Modeling Self-Priming Dielectric Elastomer Generators}
+\label{chap:3}
 
-\initial{T}his chapter is partially based on the proceeding published 
-
-One of the main challenges for the practical implementation of dielectric elastomer generators (DEGs) is supplying high voltages. To address this issue, systems using self-priming circuits (SPCs) --- which exploit the DEG voltage swing to increase its supplied voltage --- have been used with success. 
-A self-priming circuit consists of a charge pump implemented in parallel with the DEG circuit. At each energy harvesting cycle, the DEG receives a low voltage input and, through an almost constant charge cycle, generates a high voltage output. SPCs receive the high voltage output at the end of the energy harvesting cycle and supply it back as input for the following cycle, using the DEG as a voltage-multiplier element.
- Although rules for designing self-priming circuits for dielectric elastomer generators exist, they have been obtained from intuitive observation of simulation results and lack a solid theoretical foundation.
-Here we report the development of a mathematical model to predict voltage boost using self-priming circuits. The voltage on the DEG attached to the SPC is described as a function of its initial conditions, circuit parameters/layout, and the DEG capacitance. Our mathematical model has been validated on an existing DEG implementation from the literature, and successfully predicts the voltage boost for each cycle. Furthermore, it allows us to understand the conditions for the boost to exist, and obtain the design rules that maximize the voltage boost.
+\initial{T}his chapter is partially based on "Modeling self-priming circuits for dielectric elastomer generators towards optimum voltage boost" and builds up with the work reported in \cite{spcpatrin} and \cite{blablabla}. Since charging of DEGs is by itself among the main issues for their practical implementation, charging with high voltage and coordinating charge and discharge at the right moment represents an added complication. In order to simplify the implementation of DEGs regarding the high voltage priming and the need to accurately time charging and discharging, it was proposed in 2010 the implementation of self-priming circuits (SPCs) for DEGs. Such circuits allow for passive management of the charging and discharging of DEGs and only require a low voltage priming  to start the system. Despite the valorous contributions and developments made to improve such SPCs, until 2016 the only proposed method to simulate it was through the use of electronic circuit simulators the apply numerical methods (such as LTSpice). This chapter reports the development of an analytical model that allows the description of DEG-SPC systems and the clear deduction of their design rules. Moreover, this chapter presents the expansion of this model to different DEG layouts and the incorporation of lossy factors.
 
 %=======
 \section{Introduction}
 \label{sect:intro}  % \label{} allows reference to this section
-\paragraph{} According to the World Energy Council\cite{EnergyIssues}, 1.2 billion people do not have access to electricity. Energy price volatility and greenhouse gas emissions issue accentuate this issue, and point to the need for cheap, reliable and renewable energies.  As a new and emerging eletromechanical energy conversion technology, Dielectric Elastomer Generators (DEGs) are one possible solution. With low frequency and wide bandwidth\cite{Boots2buoys}, energy harvesting DEGs have already been reported for use in wave energy generation \cite{VertechyPolyWECtest2014}, human motion energy harvesting\cite{MistralHMotion2008} and even as thermal machines\cite{Boots2buoys}.
-\paragraph{} DEGs harvest energy through capacitance change induced by  deformation. The energy harvesting happens in cycles; one example with four stages I--IV is illustrated in Figure \ref{fig:cycle}. The transitions between states in this cycle are as follows.
-\begin{itemize}
-\item I$\rightarrow$II: From an initially relaxed phase, the DEG is stretched by a mechanical load and increases its capacitance.
-\item II$\rightarrow$III: Once stretched, the DEG is polarized through an electrical energy input.
-\item III$\rightarrow$IV: From stretched and polarized, in an open circuit configuration, the mechanical load is released letting the material relax, so reducing the DEG's capacitance. As the capacitance reduces and the charge stored is maintained constant, there is a voltage rise.
-\item IV$\rightarrow$I: Finally, the DEG is discharged from its more energetic state, back to its initial state.
-\end{itemize}
 
-\begin{figure}[ht]
-\begin{center}
-\begin{tabular}{c}
-\includegraphics[height=6cm]{fig03/Cycle.png}
-\end{tabular}
-\end{center}
-\caption 
-{ \label{fig:cycle}
-DEG energy harvesting cycle using relaxation with constant charge} 
-\end{figure} 
 
-\paragraph{} Among the drawbacks of current DEG technology is the necessary condition of inputting electrical energy to polarize the material. Furthermore, the energy output between states IV and I is proportional to the amount of electrical energy used to polarize the DEG between states II and III\cite{DEGCycles}, so, in order to explore the energy harvesting capabilities at its maximum, one might want to input high voltages.
-
-\paragraph{} A solution for generating the high voltage in DEGs is the use of Self-priming Circuits (SPCs), proposed by McKay \textit{et al.}\cite{SPC2010}. An SPC consists of an inverse charge pump, toggling between high and low capacitance states, depending on its polarization. The circuit is composed of diodes and capacitors, as illustrated in Figure \ref{fig:spc}.  An SPC can be polarized in a High Voltage (HV) form, which has a lower capacitance and will only allow current to charge the capacitors, or in a High Charge (HC) state, which has higher capacitance and will only allow current to flow from the SPC (considering their poles are connected such that $V_A > V_B$).
+\paragraph{} As demonstrated in Chapter 2, the way one charges a DEG will affect the cycle outcome. Particularly, when looking at how to perform the charging in practice, the issue seems even more relevant. The charging phase timing is usually linked to the maximum capacitance of a DEG in a cycle, either marking its theoretical ideal moment\cite{??} or when it should be over\cite{}. Similarly, the same timing issue can be expanded to the discharge phase and the moment the DEG achieves its minimum capacitance in a cycle. In addition, in DEG energy harvesting cycles, the electrical energy output is generally proportional to the electrical energy input used to prime it during a cycle, since the energy conversion happens when the restoring forces from the stretched material displace these charges, as explained in section \ref{??}. As a consequence, one seeks to prime the DEG with high voltages on each cycle in order to maximize its output. On the other hand, it relies on the use of bulky boost converters and an active system to manage when the charging/discharging has to be performed. If we consider applications where we intend to minimize the energy harvesting system, the increasing level of complexity these add-ons would provide might jeopardize the implementation of DEGs.
+A solution found for such cases to provide the high voltage input for DEGs is the use of Self-priming Circuits (SPCs), proposed by McKay \textit{et al.}\cite{spc1}. An SPC consists of an inverse charge pump, toggling between high and low capacitance states, depending on its polarization. The circuit is composed of diodes and capacitors, as illustrated in Figure \ref{fig:spc}.  An SPC can be polarized in a High Voltage (HV) form, which has a lower capacitance and will only allow current to charge the capacitors, or in a High Charge (HC) state, which has higher capacitance and will only allow current to flow from the SPC (considering their poles are connected such that $V_A > V_B$).
 
 \begin{figure}[ht]
 \begin{center}
@@ -65,9 +41,10 @@ SPC effective configuration with (a) HV polarization, and (b) HC polarization. A
 
 \paragraph{} The advantage of using an SPC is that it allows part of the energy output in a DEG cycle to be stored and used as an input in the following one. Through the use of an SPC it is possible to initially prime the DEG-SPC system with low voltage and, by cycles of stretching-relaxing the DEG, bring the system to high voltage and increase its energy output.
 
-\paragraph{}SPCs have been a promising topic of research, and upgrades have been made to their layout (see Figure \ref{fig:spc}), such as using antagonistic DEG membranes to replace the capacitors normally used\cite{AntagSPC}, or the use of Dielectric Elastomer Switches (DES), which are flexible resistive  elements incorporated in the membrane that are able to toggle between high and low resistance, and replace the diodes in the SPC\cite{DESSPC}.
+\paragraph{}SPCs have been a promising topic of research, and upgrades have been made to their layout (see Figure \ref{fig:spc}), such as using antagonistic DEG membranes to replace the capacitors normally used (called Integrated Self-Priming Circuits - ISPC)\cite{AntagSPC}, or the use of Dielectric Elastomer Switches (DES), which are flexible resistive  elements incorporated in the membrane that are able to toggle between high and low resistance, and replace the diodes in the SPC\cite{DESSPC}.
 
-\paragraph{}Here, we report a mathematical model of the simple SPC-DEG system and, through it, provide general design rules. Although design rules have already been suggested \cite{SPCdesign}, they appear to have been based on intuitive observation of numerical simulation results. We will derive analytic expressions for the rules, and demonstrate why they work and how they can be improved, with the overall aim of better understanding the SPC as a voltage-boosting element that can solve the high-energy input issue in DEG cycles.
+\paragraph{}Here, we report a mathematical model of the simple SPC-DEG system and, through it, provide general design rules. Although design rules have already been suggested \cite{SPCdesign}, they appear to have been based on intuitive observation of numerical simulation results. We derived analytic expressions for the rules, and demonstrate why they work and how they can be improved, with the overall aim of better understanding the SPC as a voltage-boosting element that can solve the high-energy input issue in DEG cycles. The same simplified model and rules were derived and experimentally validated shortly after the work done towards this Thesis and is described in \cite{spcpatrin}. Further, we describe a variation of the model proposed that builds on the proposed one and describes an ISPC including losses from a load in parallel.
+
 
 \section{Self-priming circuits}
 
@@ -77,7 +54,7 @@ SPC effective configuration with (a) HV polarization, and (b) HC polarization. A
 
 \paragraph{} Using an SPC connected in parallel with the  DEG, we can increase the voltage every time the DEG is cycled.  Note that the voltages represented in Figure \ref{fig:cycleph} for the HV and HC forms reflect the voltage if the SPC was simply a capacitor with constant capacitance with a certain amount of charge stored. However, given the arrangement of the diodes,  charge only flows into the SPC in its HV form and from it in its HC form.  If we consider a DEG stretch-relax cycle between fixed  maximum and minimum stretch, we can describe the DEG-SPC cycle in four phases (see Figure \ref{fig:SPCcycle}).
 
-\paragraph{Phase 1} Starting from a point similar to stage III described in Figure \ref{fig:cycle}, the DEG capacitance starts decreasing as it relaxes. Given that its voltage is not yet higher than that on the SPC in HV form, charge will not flow to the SPC. Similarly, the DEG voltage is higher than the SPC voltage in its HC form, thus, there is no charge flow from the SPC into the DEG. Consequently, we have a voltage increase in the DEG (similar to the process III$\rightarrow$IV).
+\paragraph{Phase 1} Starting from a point similar to stage III described in Figure \ref{fig:cycleph}, the DEG capacitance starts decreasing as it relaxes. Given that its voltage is not yet higher than that on the SPC in HV form, charge will not flow to the SPC. Similarly, the DEG voltage is higher than the SPC voltage in its HC form, thus, there is no charge flow from the SPC into the DEG. Consequently, we have a voltage increase in the DEG (similar to the process III$\rightarrow$IV).
 \paragraph{Phase 2} As the voltage on the DEG achieves the same level of that in the SPC in its HV form, the DEG starts discharging into the SPC. The DEG voltage keeps rising due to the capacitance decrease, and the SPC voltage rises due to its charging.
 \paragraph{Phase 3} Once the DEG stops relaxing and starts being stretched again, its capacitance starts to rise. As a consequence, the voltage starts dropping in the DEG. In an similar situation to Phase 1, there is no charge flow between the SPC and the DEG, as the first has a higher voltage in its HV form and a lower voltage in its HC form, preventing the flow of charge to or from the SPC.
 \paragraph{Phase 4} When the voltage in the DEG reaches that of the SPC in its HC form, a charging current starts to flow from the SPC. As the DEG has a capacitance decrease, its voltage keeps dropping. The SPC also loses charge due to drain into the DEG. At the moment the DEG's capacitance stops rising and starts decreasing again, the cycle restarts, going back to Phase 1.
@@ -125,17 +102,17 @@ C_{\text{SPC}_\text{HV}}&=C\left(\frac{n}{n+1}\right),\label{eq:cspchv}\\
 C_{\text{SPC}_\text{HC}}&=C\left(\frac{n+1}{n}\right).\label{eq:cspchc}
 \end{align}
 
-\paragraph{} Considering the initial situation when the circuit is primed with a voltage $V_0$, in an equilibrium condition (no current flow), we can calculate that each capacitor with capacitance $C$ has a voltage drop of
+\paragraph{} Considering the initial situation when the circuit is primed with a voltage $V_p$, in an equilibrium condition (no current flow), the SPC will be receiving charges, meaning it will be on its HV configuration. thus, we can calculate that each capacitor with capacitance $C$ has a voltage drop of
 \begin{equation}
-V_{C_{0}}=\frac{2V_{0}}{(2n+1)}.
+V_{C_{0}}=\frac{V_{p}}{(n+1)}.
 \end{equation}
-This implies that the initial voltage in which the HV form will be active is
+This implies that the initial voltage in which the HC form will be active is
 \begin{equation}
-V_{\text{SPC}_\text{HV}} = (n+1)V_{C_{0}}.
+V_{\text{SPC}_\text{HC}} = nV_{C_{0}}.
 \end{equation}
-The same reasoning can be applied to the HC form; the voltage at which it will be triggered is
+Similar reasoning can be applied when toggling to HV form; the voltage at which it will be triggered is
 \begin{equation}
-V_{\text{SPC}_\text{HC}} = \frac{n}{n+1}V_{\text{SPC}_\text{HV}}.
+V_{\text{SPC}_\text{HV}} = \frac{n+1}{n}V_{\text{SPC}_\text{HC}}.
 \end{equation}
 
 \section{Modeling the boost cycle phases}
@@ -154,15 +131,15 @@ Electronic circuit scheme of DEG-SPC system attached to a load.}
 
 \subsection{Phase 1}
 
-\paragraph{}  We consider the cycle starting from an initially charged state (provided by the source, $V_0$) and with the DEG relaxing from a stretched position that produces capacitance $C_{\text{DEG}_0}$.
+\paragraph{}  We consider the cycle starting from charged state in the local voltage minimum for a cycle, $V_0$, and with the DEG relaxing from a stretched position that produces capacitance $C_{\text{DEG}_\text{max}}$.
 
 \paragraph{} As explained previously, while the DEG relaxes, its capacitance is reduced and the voltage increases. No charge exchange happens between the SPC and the DEG, since the voltage is not large enough to trigger the HV form of the SPC. Meanwhile, some of the charge leaks  through the load (which represents either an energy harvesting impedance or simple losses/leakage in the system), resulting in
 \begin{equation}
-Q(t) = Q_0-\frac{V(t)}{Z} = V_0C_{\text{DEG}_0}-\frac{V(t)}{Z},
+Q(t) = Q_0-\frac{V(t)}{Z} = V_0C_{\text{DEG}_\text{max}}-\frac{V(t)}{Z},
 \end{equation}
 where $Q(t)$ is the charge in the DEG and $Q_0$ is the charge level in the DEG provided by the voltage source $V_0$.  The voltage in Phase 1, $V_1$, will them vary with time as
 \begin{equation}\label{eq:v1t}
-V_{1}(t) = V_0\left(\frac{C_{\text{DEG}_0}}{C_\text{DEG}(t)+t/Z}\right).
+V_{1}(t) = V_0\left(\frac{C_{\text{DEG}_\text{max}}}{C_\text{DEG}(t)+t/Z}\right).
 \end{equation}
 
 
